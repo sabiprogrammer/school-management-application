@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+   <form method="post">
+      <div class="container mt-3">
+         {% for field in form %}
+            {% if field.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+               {{field}} {{field.errors | striptags}}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            {% endif %}
+         {% endfor %}
+      </div>
+
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card card-primary">
+               <div class="card-header">
+                  <h3 class="card-title">Register a new {{user_type}}</h3>
+               </div>
+               <div class="card-body">
+                  {% for field in form %}
+                  <div class="form-group">
+                     <label>{{field.label}}</label>
+                     <div class="input-group">
+                        <div class="input-group-prepend">
+                           <span class="input-group-text">
+                              {% if field.label == 'Course Name' %}
+                              <i class="fa fa-graduation-cap"></i>
+                              {% elif field.label == 'Subject Name' %}
+                              <i class="fa fa-graduation-cap"></i>
+                              {% elif field.label == 'Username' %}
+                              <i class="fa fa-user"></i>
+                              {% elif field.label == 'Email' %}
+                              <i class="fas fa-envelope-open-text"></i>
+                              {% elif field.label == 'First name' %}
+                              <i class="fas fa-sticky-note"></i>
+                              {% elif field.label == 'Last name' %}
+                              <i class="fas fa-sticky-note"></i>
+                              {% elif field.label == 'Other name' %}
+                              <i class="fas fa-clipboard"></i>
+                              {% elif field.label == 'Password' %}
+                              <i class="fa fa-lock"></i>
+                              {% elif field.label == 'Password Confirmation' %}
+                              <i class="fa fa-lock"></i>
+                              {% endif %}
+                           </span>
+                        </div>
+                        {{field}}
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <button class="btn btn-outline-primary btn-block"><i class="fa fa-paper-plane"> </i> Register {{user_type}}</button>
+      {% csrf_token %}
+   </form>
+    
+</div>
+{% endblock content %}
